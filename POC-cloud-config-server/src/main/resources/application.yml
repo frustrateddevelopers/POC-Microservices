@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: config-server  
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/frustrateddevelopers/spring-config-server-test-properties.git
+          cloneOnStart: true          
+          searchPaths:
+          - microone
+          - microtwo              

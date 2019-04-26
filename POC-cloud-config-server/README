@@ -1,0 +1,24 @@
+http://localhost:8080/config-server/dev
+
+{"name":"config-server","profiles":["dev"],"label":null,"version":"5f8003cf2434adbe01a351b20ae932fae546f2bc","state":null,"propertySources":[{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/microtwo/application-dev.properties","source":{"msg":"microservice two: dev"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/microone/application-dev.properties","source":{"msg":"microservice one: dev"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/application-dev.properties","source":{"msg":"common - dev"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/microtwo/application.properties","source":{"msg":"microservice two"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/microone/application.properties","source":{"msg":"microservice one"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/application.properties","source":{"msg":"common"}}]}
+
+http://localhost:8080/config-server/prod
+{"name":"config-server","profiles":["prod"],"label":null,"version":"5f8003cf2434adbe01a351b20ae932fae546f2bc","state":null,"propertySources":[{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/microtwo/application-prod.properties","source":{"msg":"microservice two: prod"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/microone/application-prod.properties","source":{"msg":"microservice one: prod"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/application-prod.properties","source":{"msg":"common - prod"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/microtwo/application.properties","source":{"msg":"microservice two"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/microone/application.properties","source":{"msg":"microservice one"}},{"name":"https://github.com/frustrateddevelopers/spring-config-server-test-properties.git/application.properties","source":{"msg":"common"}}]}
+
+
+
+# config repository mentioned in yml file have below file structure
+
+parent dir:
+  application.properties
+  application-dev.properties
+  application-prod.properties
+  microone:
+    application.properties
+    application-dev.properties
+    application-prod.properties
+  microtwo:
+    application.properties
+    application-dev.properties
+    application-prod.properties
+		
