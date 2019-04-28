@@ -10,15 +10,37 @@ http://localhost:8080/config-server/prod
 # config repository mentioned in yml file have below file structure
 
 parent dir:
-  application.properties
-  application-dev.properties
-  application-prod.properties
+  application.properties                    -------------->  version
+  application-dev.properties				-------------->  databasename: Dev Database, common for all microservices
+  application-prod.properties				-------------->  databasename: Prod Database, common for all microservices
   microone:
-    application.properties
-    application-dev.properties
-    application-prod.properties
+    application.properties					-------------->  servicename: Name common for all profile for particular microservice  - microone					
+    application-dev.properties              -------------->  passwordstrategy: fetchPasswordStrategy -- read from properties file  - microone -dev
+    application-prod.properties             -------------->  passwordstrategy: fetchPasswordStrategy -- read from vault  - microone - prod
   microtwo:
-    application.properties
-    application-dev.properties
-    application-prod.properties
+    application.properties                  -------------->  servicename: Name common for all profile for particular microservice  - microtwo
+    application-dev.properties              -------------->  passwordstrategy: fetchPasswordStrategy -- read from environment variable  - microtwo -dev
+    application-prod.properties             -------------->  passwordstrategy: fetchPasswordStrategy -- read from vault  - microtwo -prod
+    
+
+# Restarted four instances for testing purpose
+  > two for microservice one i.e dev and prod
+  > two for microservice two i.e dev and prod
+  > mvn spring-boot:run -Dspring.profiles.active=dev -Dserver.port=8081         -----> Microservice one instance
+  > mvn spring-boot:run -Dspring.profiles.active=prod -Dserver.port=8082        -----> Microservice one instance
+  > mvn spring-boot:run -Dspring.profiles.active=dev -Dserver.port=8083         -----> Microservice two instance
+  > mvn spring-boot:run -Dspring.profiles.active=prod -Dserver.port=8084        -----> Microservice two instance
+    
+# To refresh config properties , below points should keep in mind
+	
+	1) there are two ways to refresh config at runtime
+		> actuator/refresh endpoin
+		> spring cloud bus
+		
+	2) How to use actuator/refresh endpoint
+	   > whether loading configuration from system using git or using git remote repository, after making changes
+	     must be committed, without committing and hitting the refresh point changes will not take effect
+	   > made changes in config file i.e parent top dev properties and microone service dev properties
+	   > Hit actuator endpoint i.e http://localhost:8081/actuator/refresh endpoint with empty body with
+	     content-type(application/json) with POST request, will return response with updated properties attribute name    
 		
