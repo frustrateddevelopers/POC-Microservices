@@ -1,0 +1,13 @@
+# Run instances on below ports(Optional)
+	> Cloud Config Server ->				8080
+	> Microservice one Dev profile ->		8081
+	> Microservice one Prod profile ->		8082
+	> Microservice two Dev profile ->		8083
+	> Microservice two Prod profile ->		8084
+	> Eureka Server ->						8090
+	
+	
+	
+# 	Register Microservice one and two with eureka server
+# 	Let one microservice to consume other microservice i.e let Microservice ONE to be consumed by Microservice TWO instead of 
+    using hardcode ip and port use discovery client
