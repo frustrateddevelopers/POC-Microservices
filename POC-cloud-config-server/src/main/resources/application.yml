@@ -5,5 +5,5 @@ spring:
     config:
       server:
         git:
-          uri: ${HOME}/eclipse-workspace/spring-config-server-test-properties.git
+          uri: https://github.com/frustrateddevelopers/spring-config-server-test-properties.git
           searchPaths: "{application}"
