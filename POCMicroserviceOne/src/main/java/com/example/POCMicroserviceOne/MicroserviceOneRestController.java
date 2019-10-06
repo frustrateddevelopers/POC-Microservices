@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import com.example.POCMicroserviceOne.feign.MicroserviceTwoFeignClient;
 
 @RefreshScope
 @RestController
@@ -30,6 +30,9 @@ public class MicroserviceOneRestController {
 		
 	
 	    @Value("${passwordstrategy}") private String passwordstrategy;
+
+	    @Autowired
+	    private MicroserviceTwoFeignClient microOneFeignClient;
 	 
 	   
 	    @Autowired
@@ -51,6 +54,15 @@ public class MicroserviceOneRestController {
 	    public String getServiceProperties(){
 	    	System.out.println("Getting micro two properties");
 	    	String response = restTemplate.exchange("http://microtwo/properties", HttpMethod.GET, null, new ParameterizedTypeReference<String>() {}, "").getBody();
+	    	System.out.println("Response Received as " + response);
+	    	return response;
+	    }
+	    
+	    @GetMapping("/remote_service_properties_feign")
+	    @LoadBalanced
+	    public String getServicePropertiesFeignClient(){
+	    	System.out.println("Getting micro two properties using feign client");
+	    	String response = microOneFeignClient.getRemoteProperties();
 	    	System.out.println("Response Received as " + response);
 	    	return response;
 	    }

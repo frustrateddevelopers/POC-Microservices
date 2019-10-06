@@ -10,6 +10,7 @@ public class PocCloudConfigServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PocCloudConfigServerApplication.class, args);
+		System.out.println("");
 	}
 
 }
